@@ -206,6 +206,21 @@ header.nav {
   transform: translateY(-1px);
 }
 .brand .dot { color: var(--accent-2); }
+.brand-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 10px rgba(124, 140, 255, 0.35);
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.brand:hover .brand-avatar {
+  transform: scale(1.08);
+  box-shadow: 0 0 14px rgba(124, 140, 255, 0.6);
+}
 
 .nav-links {
   display: flex;
@@ -375,6 +390,34 @@ section:last-of-type { border-bottom: none; }
   gap: 56px;
   align-items: center;
 }
+
+/* Calligraphy Welcome on Hero */
+.hero-calligraphy-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.calligraphy-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 25%, var(--accent) 70%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(124, 140, 255, 0.35));
+}
+.calligraphy-sparkle {
+  color: var(--accent-2);
+  font-size: 1.1rem;
+  animation: sparkleTwinkle 2.5s ease-in-out infinite;
+}
+@keyframes sparkleTwinkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; filter: drop-shadow(0 0 4px var(--accent-2)); }
+  50% { transform: scale(1.3) rotate(20deg); opacity: 1; filter: drop-shadow(0 0 10px var(--accent-2)); }
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -436,6 +479,187 @@ section:last-of-type { border-bottom: none; }
   border-color: var(--border-glass);
 }
 .hero-socials svg { width: 17px; height: 17px; }
+
+/* ---------- Hero Showcase & Profile Card ---------- */
+.hero-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.showcase-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 4px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  align-self: flex-start;
+  box-shadow: var(--glass-shadow);
+}
+
+.showcase-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.showcase-tab:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.showcase-tab.active {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: 0 4px 14px rgba(124, 140, 255, 0.22);
+}
+
+.showcase-panel {
+  display: none;
+}
+
+.showcase-panel.active {
+  display: block;
+  animation: panelCascade 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panelCascade {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Profile Intro Card in Hero */
+.profile-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  pointer-events: none;
+}
+
+.profile-card:hover {
+  border-color: var(--border-glass-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.profile-card-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.profile-photo-container {
+  position: relative;
+  flex-shrink: 0;
+  width: 82px;
+  height: 82px;
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 2px solid var(--border-glass);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(124, 140, 255, 0.25);
+  transition: transform 0.25s ease;
+}
+
+.profile-card:hover .profile-photo {
+  transform: scale(1.03);
+}
+
+.profile-live-status {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #28c840;
+  border: 2.5px solid var(--bg);
+  box-shadow: 0 0 10px #28c840;
+}
+
+.profile-header-meta h3 {
+  font-size: 1.28rem;
+  margin-bottom: 4px;
+}
+
+.profile-tagline {
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.profile-location-text {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-summary-text {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.profile-skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-chip {
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  transition: all 0.2s ease;
+}
+
+.profile-chip:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
 
 /* ---------- Glass Code Window ---------- */
 .code-window {
@@ -553,6 +777,121 @@ section:last-of-type { border-bottom: none; }
   grid-template-columns: 1fr 1fr;
   gap: 56px;
   align-items: start;
+}
+/* ---------- About Showcase with Medium Portrait ---------- */
+.about-showcase {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px;
+  background: var(--bg-card);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  pointer-events: none;
+}
+
+.about-showcase:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-glass-hover);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+.about-photo-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 180px;
+  height: 180px;
+}
+
+.about-medium-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 2px solid var(--border-glass);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 24px rgba(124, 140, 255, 0.25);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.about-showcase:hover .about-medium-photo {
+  transform: scale(1.02);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 30px rgba(124, 140, 255, 0.35);
+}
+
+.about-photo-status {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #28c840;
+  border: 2.5px solid var(--bg);
+  box-shadow: 0 0 10px #28c840;
+}
+
+.about-showcase-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--accent-2);
+  background: var(--accent-2-soft);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
+  padding: 3px 12px;
+  border-radius: 999px;
+  margin-bottom: 4px;
+}
+
+.about-name {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.about-role {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.about-meta-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-tag {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 .about-grid p { color: var(--text-muted); margin-bottom: 16px; font-size: 1.02rem; }
 .about-grid p strong { color: var(--text); font-weight: 600; }
@@ -853,6 +1192,193 @@ section:last-of-type { border-bottom: none; }
   color: #ff5f57;
   border: 1px solid color-mix(in srgb, #ff5f57 40%, transparent);
   box-shadow: 0 4px 16px rgba(255, 95, 87, 0.2);
+}
+
+/* ---------- Welcome Calligraphy Intro Screen ---------- */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(5, 8, 14, 0.82);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+}
+
+.welcome-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.welcome-card {
+  position: relative;
+  max-width: 520px;
+  width: 100%;
+  background: var(--bg-card);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid var(--border-glass);
+  border-radius: 24px;
+  padding: 38px 30px;
+  text-align: center;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.85),
+              0 0 50px rgba(124, 140, 255, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(0.92) translateY(24px);
+  opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+  overflow: hidden;
+}
+
+.welcome-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-2), var(--accent), transparent);
+  pointer-events: none;
+}
+
+.welcome-overlay.active .welcome-card {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.welcome-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.welcome-close:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  transform: scale(1.1);
+  box-shadow: 0 0 14px rgba(124, 140, 255, 0.4);
+}
+
+.welcome-sparkle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--accent-2);
+  background: var(--accent-2-soft);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.welcome-calligraphy {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.6rem, 7vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #ffffff 15%, var(--accent) 65%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 22px rgba(124, 140, 255, 0.45));
+  letter-spacing: 0.02em;
+}
+
+.welcome-avatar-wrap {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 16px;
+}
+
+.welcome-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg), var(--bg)) padding-box,
+              linear-gradient(135deg, var(--accent), var(--accent-2), #ec4899) border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 24px rgba(124, 140, 255, 0.35);
+  position: relative;
+  z-index: 1;
+}
+
+.welcome-avatar-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 140, 255, 0.4) 0%, transparent 70%);
+  animation: avatarPulse 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes avatarPulse {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+.welcome-name {
+  font-size: 1.45rem;
+  margin-bottom: 4px;
+}
+
+.welcome-role {
+  font-size: 0.92rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.welcome-role .sep { color: var(--text-faint); margin: 0 6px; }
+
+.welcome-intro {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.welcome-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.welcome-enter-btn {
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 20px rgba(124, 140, 255, 0.35);
+  transition: all 0.22s ease;
+}
+
+.welcome-enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(124, 140, 255, 0.55);
 }
 
 /* ---------- Certifications Glass Modal Lightbox ---------- */
@@ -1216,4 +1742,14 @@ footer p.role-line { margin-top: 4px; }
   .edu-card { flex-direction: column; }
   .edu-meta { text-align: left; }
   .wrap { padding: 0 20px; }
+  .welcome-card { padding: 32px 18px 26px; border-radius: 20px; }
+  .welcome-avatar-wrap { width: 92px; height: 92px; margin-bottom: 12px; }
+  .welcome-calligraphy { font-size: 2.4rem; margin-bottom: 14px; }
+  .profile-card { padding: 20px; }
+  .profile-card-header { gap: 14px; }
+  .profile-photo-container { width: 70px; height: 70px; }
+  .about-showcase { flex-direction: column; text-align: center; gap: 16px; padding: 20px 16px; }
+  .about-photo-wrap { width: 160px; height: 160px; }
+  .about-status-pill { align-self: center; }
+  .about-meta-tags { align-items: center; }
 }

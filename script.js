@@ -74,7 +74,7 @@ function initGlassCardsEffect() {
   if (window.matchMedia('(pointer: coarse)').matches) return; // Skip touch devices
 
   const glassCards = document.querySelectorAll(
-    '.project-card, .skill-card, .fact-card, .cert-card, .activity-card, .code-window, .contact-item'
+    '.project-card, .skill-card, .fact-card, .cert-card, .activity-card, .code-window, .contact-item, .profile-card, .welcome-card, .about-showcase'
   );
 
   glassCards.forEach(card => {
@@ -94,6 +94,97 @@ function initGlassCardsEffect() {
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
     });
+  });
+}
+
+// Welcome Calligraphy Intro Modal
+function initWelcomeModal() {
+  const welcomeModal = document.getElementById('welcomeModal');
+  if (!welcomeModal) return;
+
+  const welcomeClose = document.getElementById('welcomeClose');
+  const welcomeEnterBtn = document.getElementById('welcomeEnterBtn');
+
+  function openWelcome() {
+    welcomeModal.classList.add('active');
+    if (welcomeEnterBtn) welcomeEnterBtn.focus();
+  }
+
+  function closeWelcome() {
+    welcomeModal.classList.remove('active');
+    sessionStorage.setItem('portfolio-welcome-seen', 'true');
+  }
+
+  // Show on load if not dismissed in this session
+  const hasSeenWelcome = sessionStorage.getItem('portfolio-welcome-seen');
+  if (!hasSeenWelcome) {
+    // Brief smooth pause for initial page entrance bloom
+    setTimeout(openWelcome, 350);
+  }
+
+  if (welcomeClose) {
+    welcomeClose.onclick = closeWelcome;
+  }
+
+  if (welcomeEnterBtn) {
+    welcomeEnterBtn.onclick = closeWelcome;
+  }
+
+  welcomeModal.onclick = (e) => {
+    if (e.target === welcomeModal) closeWelcome();
+  };
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && welcomeModal.classList.contains('active')) {
+      closeWelcome();
+    }
+  });
+
+  // Re-trigger welcome when clicking brand avatar on index page
+  const brandAvatar = document.querySelector('.brand-avatar');
+  if (brandAvatar) {
+    brandAvatar.style.cursor = 'pointer';
+    brandAvatar.title = 'Click to replay welcome greeting';
+    brandAvatar.onclick = (e) => {
+      const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('.html');
+      if (isIndex) {
+        e.preventDefault();
+        openWelcome();
+      }
+    };
+  }
+}
+
+// Hero Showcase Tabs (Profile Intro vs profile.js)
+function initShowcaseTabs() {
+  const tabs = document.querySelectorAll('.showcase-tab');
+  const panels = document.querySelectorAll('.showcase-panel');
+
+  if (tabs.length === 0 || panels.length === 0) return;
+
+  tabs.forEach(tab => {
+    tab.onclick = () => {
+      const targetTab = tab.getAttribute('data-tab');
+
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      panels.forEach(panel => {
+        panel.classList.remove('active');
+      });
+
+      if (targetTab === 'profile') {
+        const p = document.getElementById('panelProfile');
+        if (p) p.classList.add('active');
+      } else if (targetTab === 'code') {
+        const c = document.getElementById('panelCode');
+        if (c) c.classList.add('active');
+      }
+    };
   });
 }
 
@@ -228,6 +319,8 @@ function initPageComponents() {
   initCertModal();
   initContactForm();
   initGlassCardsEffect();
+  initWelcomeModal();
+  initShowcaseTabs();
   bindTransitionLinks();
 }
 

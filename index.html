@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -36,9 +36,33 @@
     <div class="transition-spinner"></div>
   </div>
 
+  <!-- Welcome Calligraphy Intro Screen -->
+  <div class="welcome-overlay" id="welcomeModal" role="dialog" aria-modal="true" aria-label="Welcome greeting">
+    <div class="welcome-card">
+      <button class="welcome-close" id="welcomeClose" aria-label="Close welcome message">&times;</button>
+      <div class="welcome-sparkle-pill">✨ Greetings</div>
+      <h2 class="welcome-calligraphy">Welcome to my Portfolio</h2>
+      <div class="welcome-avatar-wrap">
+        <img src="profile.jpg" alt="Elangovan S" class="welcome-avatar">
+        <div class="welcome-avatar-glow"></div>
+      </div>
+      <h3 class="welcome-name">Elangovan S</h3>
+      <p class="welcome-role">Full Stack Web Developer <span class="sep">|</span> AI/ML Enthusiast</p>
+      <p class="welcome-intro">
+        Warm welcome! I'm an Artificial Intelligence &amp; Data Science student passionate about crafting clean full-stack web applications and exploring intelligent machine learning solutions. Delighted to have you here—take a look around!
+      </p>
+      <div class="welcome-actions">
+        <button class="btn btn-primary welcome-enter-btn" id="welcomeEnterBtn">
+          Explore Portfolio
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <header class="nav">
     <div class="nav-inner">
-      <a href="#top" class="brand">Elangovan<span class="dot">.</span>dev</a>
+      <a href="#top" class="brand"><img src="profile.jpg" alt="Elangovan S" class="brand-avatar"> Elangovan<span class="dot">.</span>dev</a>
       <nav id="nav-links-mobile-wrap">
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html#about" class="active" aria-current="page">About</a></li>
@@ -78,12 +102,16 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
+          <div class="hero-calligraphy-wrap">
+            <span class="calligraphy-script">Welcome to my portfolio</span>
+            <span class="calligraphy-sparkle">✦</span>
+          </div>
           <div class="eyebrow"><span class="pulse"></span> open to internship &amp; entry-level roles</div>
           <h1>Elangovan S</h1>
           <p class="role">Full Stack Web Developer <span class="sep">|</span> AI/ML Enthusiast</p>
           <p class="desc">I build full-stack web applications with React, Next.js and Node.js, and I'm exploring how
             machine learning can make software more useful. Currently a B.Tech AI &amp; Data Science student, gaining
-            hands-on experience through a full-stack development internship.</p>
+            hands-on experience through full-stack development and cloud infrastructure internships.</p>
           <div class="hero-actions">
             <a href="projects.html" class="btn btn-primary">View My Projects</a>
             <a href="contact.html" class="btn btn-outline">Contact Me</a>
@@ -108,12 +136,56 @@
           </div>
         </div>
 
-        <div class="code-window">
-          <div class="code-window-bar">
-            <span class="dot2 red"></span><span class="dot2 yellow"></span><span class="dot2 green"></span>
-            <span class="filename">profile.js</span>
+        <div class="hero-showcase">
+          <div class="showcase-tabs" role="tablist">
+            <button class="showcase-tab active" data-tab="profile" id="tabProfile" role="tab" aria-selected="true" aria-controls="panelProfile">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Introduction
+            </button>
+            <button class="showcase-tab" data-tab="code" id="tabCode" role="tab" aria-selected="false" aria-controls="panelCode">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              profile.js
+            </button>
           </div>
-          <pre><span class="c-key">const</span> developer = {
+
+          <!-- Profile & Intro Card Panel -->
+          <div class="showcase-panel active" id="panelProfile" role="tabpanel" aria-labelledby="tabProfile">
+            <div class="profile-card">
+              <div class="profile-card-header">
+                <div class="profile-photo-container">
+                  <img src="profile.jpg" alt="Elangovan S" class="profile-photo">
+                  <span class="profile-live-status" title="Active &amp; Ready for opportunities"></span>
+                </div>
+                <div class="profile-header-meta">
+                  <h3>Elangovan S</h3>
+                  <p class="profile-tagline">Full Stack Developer &amp; AI/ML</p>
+                  <span class="profile-location-text">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Vellore, Tamil Nadu
+                  </span>
+                </div>
+              </div>
+              <p class="profile-summary-text">
+                B.Tech AI &amp; Data Science student dedicated to building robust, high-performance web applications with modern stacks (React, Next.js, Node.js) and exploring machine learning &amp; computer vision models.
+              </p>
+              <div class="profile-skills-chips">
+                <span class="profile-chip">⚛️ React &amp; Next.js</span>
+                <span class="profile-chip">🟢 Node.js &amp; Express</span>
+                <span class="profile-chip">🍃 MongoDB</span>
+                <span class="profile-chip">🤖 PyTorch &amp; OpenCV</span>
+                <span class="profile-chip">☁️ AWS &amp; Cloud</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Window Panel -->
+          <div class="showcase-panel" id="panelCode" role="tabpanel" aria-labelledby="tabCode">
+            <div class="code-window">
+              <div class="code-window-bar">
+                <span class="dot2 red"></span><span class="dot2 yellow"></span><span class="dot2 green"></span>
+                <span class="filename">profile.js</span>
+              </div>
+              <pre><span class="c-key">const</span> developer = {
   name: <span class="c-str">'Elangovan S'</span>,
   based: <span class="c-str">'Vellore, Tamil Nadu'</span>,
   studying: <span class="c-str">'B.Tech AI &amp; Data Science'</span>,
@@ -122,9 +194,11 @@
   currentRole: <span class="c-str">'Full Stack Intern'</span>,
 
   <span class="c-fn">buildSomething</span>() {
-    <span class="c-key">return</span> <span class="c-str">'let's talk 👋'</span>;
+    <span class="c-key">return</span> <span class="c-str">'let\'s talk 👋'</span>;
   }
 };</pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -133,6 +207,23 @@
       <div class="wrap about-grid">
         <div>
           <div class="section-label">01 · about</div>
+          <div class="about-showcase">
+            <div class="about-photo-wrap">
+              <img src="profile.jpg" alt="Elangovan S" class="about-medium-photo">
+              <span class="about-photo-status" title="Active &amp; Open to opportunities"></span>
+            </div>
+            <div class="about-showcase-info">
+              <div class="about-status-pill">
+                <span class="pulse"></span> Open to Roles
+              </div>
+              <h3 class="about-name">Elangovan S</h3>
+              <p class="about-role">Full Stack Web Developer &bull; AI/ML Enthusiast</p>
+              <div class="about-meta-tags">
+                <span class="about-tag">🎓 B.Tech AI &amp; Data Science</span>
+                <span class="about-tag">📍 Vellore, Tamil Nadu</span>
+              </div>
+            </div>
+          </div>
           <h2>A developer who likes finishing what he starts</h2>
           <p>I'm <strong>Elangovan S</strong>, a B.Tech Artificial Intelligence and Data Science student based in
             Vellore, Tamil Nadu. My main focus is full-stack web development — building interfaces in React and Next.js,
